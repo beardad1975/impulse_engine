@@ -121,6 +121,12 @@ def cross(a, b):
         elif not a_is_vector and b_is_vector:
             return Vec2(b.y * -a, b.x * a)
         
+def distanceSq(a, b):
+    dx = a.x - b.x
+    dy = a.y - b.y
+    
+    return dx**2 + dy**2
+
         
         
 if __name__ == '__main__':
