@@ -15,8 +15,8 @@ class Body:
         self.invMass = 0
         self.inertia = 0
         self.invInertia = 0
-        self.staticFriction = 0.6
-        self.dynamicFriction = 0.4
+        self.staticFriction = 0.4
+        self.dynamicFriction = 0.3
         self.restitution = RESTITUTION
         
         self.shape.computeMass(density, self)

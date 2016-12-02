@@ -4,7 +4,7 @@ import math
 from vector import Vec2, dot, cross, distanceSq
 from body import Body
 from shape import Circle, Polygon
-from impulse_math import RESTING, EPSILON, gt, PENETRATION_ALLOWANCE, PENETRATION_CORRECTION, equal
+from impulse_math import RESTING, EPSILON, gt, PENETRATION_ALLOWANCE, PENETRATION_CORRECTION, equal, RESTITUTION,STATIC_FRICTION,DYNIMIC_FRICTION
 
 class NotImplement(Exception): pass
 
@@ -20,9 +20,9 @@ class Manifold:
         self.impulse_normal = Vec2()
         self.contact_points = [Vec2(), Vec2()]
         self.contactCount = 0
-        self.e = 0.3
-        self.sf = 0.4
-        self.df = 0.2
+        self.e = RESTITUTION
+        self.sf = STATIC_FRICTION
+        self.df = DYNIMIC_FRICTION
         
     def solve(self):
         if isinstance(self.A.shape, Circle) and isinstance(self.B.shape, Circle):
@@ -333,7 +333,10 @@ class Manifold:
 
             #Impulse
             rv = B.velocity + cross(B.angularVelocity, rb) - A.velocity - cross(A.angularVelocity, ra)
-
+            
+            
+            #print("rv:",rv)
+            
             contactVel = dot(rv, self.impulse_normal)
             if contactVel > 0:
                 return
@@ -396,6 +399,7 @@ class Manifold:
         A = self.A
         B = self.B
         correction = max( self.penetration - PENETRATION_ALLOWANCE ,0)/ (A.invMass + B.invMass)  * PENETRATION_CORRECTION
+        
         
         A.pos -=  self.impulse_normal * correction * A.invMass
         B.pos +=  self.impulse_normal * correction * B.invMass

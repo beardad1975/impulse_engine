@@ -1,1 +1,20 @@
-ImpulseEngine python adn pygame porting 
+ImpulseEngine python adn pygame porting by beardad1975.
+
+Based on Philip Diffenderfer's Java Porting and RandyGaul's original ImpuseEngine. Thank them both.
+
+C++ Impulse Engine by RandyGual:
+https://github.com/RandyGaul/ImpulseEngine
+
+Java port Impulse Engine by Philip Diffenderfer:
+https://github.com/ClickerMonkey/ImpulseEngine
+
+
+This was a casual implementation in order to learn some internal works of a pyhsics engine.So no optimization.
+
+This was build with python 3.5.2 and pygame 1.9.2a0 on my win8 laptop.
+
+
+
+  
+
+ 

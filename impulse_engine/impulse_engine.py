@@ -19,7 +19,7 @@ GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 BLACK = (0,0,0)
-
+YELLOW = (255,255,0)
 
 
 
@@ -35,7 +35,7 @@ class Game:
     
 
     #accumulator = 0
-    iterations = 4
+    iterations = 8
     bodies = []
     need_to_remove = []
         
@@ -127,8 +127,7 @@ def handle_event():
             #b = Body(Polygon(verts=verts), mouseX, Game.screen_size[1]-mouseY)
             b = Body(Polygon(boxHw=hw, boxHh=hh), mouseX, mouseY)
             #b.setOrient(1.5)
-            b.dynamicFriction = 0.4
-            b.staticFriction = 0.6
+            
             
             Game.bodies.append(b)
             #print("vertices:",b.shape.vertices)
@@ -147,8 +146,7 @@ def handle_event():
             b = Body(Polygon(verts=verts), mouseX, mouseY)
             
             
-            b.dynamicFriction = 0.4
-            b.staticFriction = 0.6
+            
             
             Game.bodies.append(b)
             #print("vertices:",b.shape.vertices)
@@ -271,11 +269,11 @@ def draw():
             
             #pos = (int(b.pos.x),  int(b.pos.y))
             pos = (int(b.pos.x),int(b.pos.y))
-            pygame.draw.circle(Game.screen, WHITE, pos, radius, 1)
-            
+            pygame.draw.circle(Game.screen, YELLOW, pos, radius, 1)
+            #pygame.draw.circle(Game.screen, YELLOW, pos, radius, 3)
             #orientPos = (int(b.pos.x + rx), int(b.pos.y + ry))
             orientPos = (int(b.pos.x + rx),  int(b.pos.y + ry))
-            pygame.draw.line(Game.screen, WHITE, pos, orientPos)
+            pygame.draw.line(Game.screen, YELLOW, pos, orientPos, 1)
         elif isinstance(b.shape, Polygon):
             point_list = []
             for v in b.shape.vertices:
@@ -295,12 +293,15 @@ def draw():
             
             start_pos = (int(pos.x), int( pos.y))
             normal_pos = (int(pos.x + n.x*10), int( pos.y + n.y*10))
-            pygame.draw.line(Game.screen, GREEN,start_pos, normal_pos)
+            if isinstance(m.A.shape, Circle):
+                pygame.draw.line(Game.screen, YELLOW,start_pos, normal_pos)
+            else:
+                pygame.draw.line(Game.screen, WHITE,start_pos, normal_pos)
             
             if i == 0 :
                 pygame.draw.circle(Game.screen, RED, start_pos, 2, 0)
             else:
-                pygame.draw.circle(Game.screen, WHITE, start_pos, 2, 0)
+                pygame.draw.circle(Game.screen, GREEN, start_pos, 2, 0)
     
     #flip
     pygame.display.flip()
